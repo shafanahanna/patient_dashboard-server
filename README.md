@@ -14,8 +14,9 @@ This application aims to streamline the process of tracking patient data and enh
 ## Tech Stack
 
 - **Backend**: Node.js, Express.js, Mongoose (MongoDB)
-- **Database**: MongoDB
+- **Database**: MongoDB , mongoose
 - **Authentication**: JWT for secure access
+- **Validation**:For schema validation,i implement the joi validation.
 
 
 
