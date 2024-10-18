@@ -40,3 +40,39 @@ export const getPatientById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// Delete a patient by ID
+export const deletePatient = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const patient = await Patient.findByIdAndDelete(id);
+      if (!patient) return res.status(404).json({ message: "Patient not found" });
+  
+      res.status(200).json({ message: "Patient deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
+  // Update a patient by ID
+  export const updatePatient = async (req, res) => {
+    const { id } = req.params;
+    const { value, error } = validatePatient(req.body); 
+    if (error) return res.status(400).json({ message: error.details[0].message });
+  
+    try {
+      const updatedPatient = await Patient.findByIdAndUpdate(id, value, {
+        new: true,
+        runValidators: true, 
+      });
+  
+      if (!updatedPatient) return res.status(404).json({ message: "Patient not found" });
+  
+      res.status(200).json({data:updatedPatient});
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
