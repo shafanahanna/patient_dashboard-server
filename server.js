@@ -6,23 +6,18 @@ import authrouter from './routes/Authroutes.js';
 import patientrouter from './routes/Patientroutes.js';
 import formrouter from './routes/AuthFormroutes.js';
 
-dotenv.config();  // Load environment variables
+dotenv.config(); 
 
-// MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000, // 30 seconds timeout for server selection
+  
+  serverSelectionTimeoutMS: 15000, // Increase the server selection timeout
+  socketTimeoutMS: 45000 // Increase the socket timeout
 })
 .then(() => console.log('Connected to MongoDB'))
-.catch((err) => console.error('MongoDB connection error:', err));
+.catch(error => console.error('MongoDB connection error:', error));
 
 const app = express();
-
-// Middleware to parse JSON requests
 app.use(express.json());
-
-// CORS setup to allow cross-origin requests
 app.use(
   cors({
     origin: "*",
@@ -30,20 +25,12 @@ app.use(
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
-);
+); 
 
-// Route middlewares
 app.use('/api/auth', authrouter);
 app.use('/api/', patientrouter);
 app.use('/api/', formrouter);
 
-// Error handling middleware for better debugging
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Internal Server Error' });
-});
-
-// Set server port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
