@@ -4,10 +4,10 @@ const authorizationRequestSchema = new mongoose.Schema(
     {
         patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patient', required: true },
         treatment: { type: String, required: true },
-        insurancePlan: { type: String, required: true }, // New field for insurance plan
-        dateOfService: { type: Date, required: true }, // New field for date of service
-        diagnosisCode: { type: String, required: true }, // New field for diagnosis code
-        doctorNotes: { type: String }, // Optional field for doctor notes
+        insurancePlan: { type: String, required: true },
+        dateOfService: { type: Date, required: true }, 
+        diagnosisCode: { type: String, required: true },
+        doctorNotes: { type: String }, 
         status: { type: String, enum: ['Pending', 'Approved', 'Denied'] },
     },
     { timestamps: true }

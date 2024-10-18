@@ -5,7 +5,7 @@ export const validatePatient = (data) => {
     const schema = Joi.object({
         name: Joi.string().min(1).max(100).required(),
         age: Joi.number().integer().min(0).required(),
-        condition: Joi.string().allow("").max(200), // Optional condition field
+        condition: Joi.string().allow("").max(200), 
         
         medications: Joi.array().items(
             Joi.object({
@@ -28,12 +28,12 @@ export const validatePatient = (data) => {
 // Authorization Request Validation Schema
 export const validateAuthorizationRequest = (data) => {
     const schema = Joi.object({
-      patientId: Joi.string().required(), // should be an ObjectId but validated as string
+      patientId: Joi.string().required(),
       treatment: Joi.string().min(3).max(255).required(),
-      insurancePlan: Joi.string().min(3).max(255).required(), // New field for insurance plan
-      dateOfService: Joi.date().required(), // New field for date of service
-      diagnosisCode: Joi.string().min(1).max(20).required(), // New field for diagnosis code
-      doctorNotes: Joi.string().allow(''), // optional field
+      insurancePlan: Joi.string().min(3).max(255).required(), 
+      dateOfService: Joi.date().required(), 
+      diagnosisCode: Joi.string().min(1).max(20).required(), 
+      doctorNotes: Joi.string().allow(''), 
       status: Joi.string().valid('Pending', 'Approved', 'Denied'),
     });
   

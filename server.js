@@ -8,11 +8,7 @@ import formrouter from './routes/AuthFormroutes.js';
 
 dotenv.config(); 
 
-mongoose.connect(process.env.MONGODB_URI, {
-  
-  serverSelectionTimeoutMS: 15000, // Increase the server selection timeout
-  socketTimeoutMS: 45000 // Increase the socket timeout
-})
+mongoose.connect(process.env.MONGODB_URI )
 .then(() => console.log('Connected to MongoDB'))
 .catch(error => console.error('MongoDB connection error:', error));
 
