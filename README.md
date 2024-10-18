@@ -17,6 +17,7 @@ This application aims to streamline the process of tracking patient data and enh
 - **Database**: MongoDB , mongoose
 - **Authentication**: JWT for secure access
 - **Validation**:For schema validation,i implement the joi validation.
+- **MVC**:i implement the MVC architecture for backend.
 
 
 
